@@ -22,7 +22,7 @@ export default function Home() {
     if (!cookies.token) navigate("/login");
 
     // Fetch messages
-    axios.get("http://localhost:4000/api/message/get-messages", {
+    axios.get("https://chat-app-fsm6.onrender.com/api/message/get-messages", {
       headers: {
         Authorization: `Basic ${cookies.token}`,
       },
@@ -33,14 +33,14 @@ export default function Home() {
     });
 
     // Fetch users
-    axios.get("http://localhost:4000/api/user/get-users")
+    axios.get("https://chat-app-fsm6.onrender.com/api/user/get-users")
     .then((res) => {
       const data = res.data;
       setUsers(data);
     });
 
     // Initialize socket connection
-    setSocket(io("http://localhost:4000"));
+    setSocket(io("https://chat-app-fsm6.onrender.com"));
   }, []);
 
   useEffect(() => {

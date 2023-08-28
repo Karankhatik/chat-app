@@ -26,7 +26,7 @@ export default function Message(props) {
     async function fetchData() {
       // Fetching link data if the message has a link
       if (props.msgObj.link) {
-        let res = await axios.get("http://localhost:4000/fetch-data", {
+        let res = await axios.get("https://chat-app-fsm6.onrender.com/fetch-data", {
           params: {
             url: props.msgObj.link,
           },

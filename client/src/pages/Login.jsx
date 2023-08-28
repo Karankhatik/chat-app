@@ -30,7 +30,7 @@ export default function Login() {
     if (login) {
       // login
       axios
-        .post("http://localhost:4000/api/user/login", {
+        .post("https://chat-app-fsm6.onrender.com/api/user/login", {
           mail: mail,
           password: pass,
         })
@@ -55,7 +55,7 @@ export default function Login() {
 
   function register() {
     axios
-      .post("http://localhost:4000/api/user/register", {
+      .post("https://chat-app-fsm6.onrender.com/api/user/register", {
         username: name,
         mail: mail,
         password: pass,
