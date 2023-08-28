@@ -1,6 +1,5 @@
 require("dotenv").config();
 const exp = require("express");
-const bcrypt = require("bcrypt");
 const cors = require("cors");
 const jwt = require("jsonwebtoken");
 const db = require('./config/mongoose');
@@ -10,8 +9,8 @@ app.use(exp.json());
 app.use(cors());
 const server = require('http').createServer(app);
 const Message = require('./models/message');
-const io = require('socket.io')
-const serverSocket = io(server);
+const socketIo = require('socket.io');
+const io = socketIo(server);
 
 io.on("connection", socket => {
     socket.on("msg", (token, msgObj) => {
@@ -34,6 +33,6 @@ io.on("connection", socket => {
 // use express router
 app.use('/api', require('./routes'));
 
-serverSocket.listen(process.env.PORT, () => {
+server.listen(process.env.PORT, () => {
     console.log("Server is listening on port " + process.env.PORT);
 });
