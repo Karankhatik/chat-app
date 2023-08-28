@@ -11,19 +11,14 @@ const Message = require('./models/message');
 const socketIo = require('socket.io');
 const io = socketIo(server);
 
-app.use((req, res, next) => {
-    res.setHeader('Access-Control-Allow-Origin', 'https://chat-app-kk.vercel.app'); // Replace with your frontend's URL
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
-    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-    // You can add more headers and methods as needed
-  
-    next();
-  });
+
+const corsOptions = {
+    origin: "*",
+    credentials: true, //access-control-allow-credentials:true
+    optionSuccessStatus: 200,
+  };
 // Allow requests from specific origins
-app.use(cors({
-    origin: "https://chat-app-kk.vercel.app",
-    methods: "GET, POST", 
-  }));
+app.use(cors(corsOptions));
 
 io.on("connection", socket => {
     socket.on("msg", (token, msgObj) => {
