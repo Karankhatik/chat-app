@@ -14,8 +14,8 @@
     <ol>
         <li>Navigate to the <em>client</em> and <em>server</em> directories in your terminal.</li>
         <li>Run the command <code>npm install</code> in both the <em>client</em> and <em>server</em> directories to install dependencies.</li>
-        <li>In the <em>server</em> directory, create a <code>.env</code> file and set your <code>JWT_SECRET_KEY</code> value.</li>
-        <li>In the <em>server</em> directory, run the command <code>node index.js</code> to start the server.</li>
+        <li>In the <em>server</em> directory, create a <code>.env</code> file and set your <code>JWT_SECRET_KEY, PORT, and DB_URL</code> value.</li>
+        <li>In the <em>server</em> directory, run the command <code>npm start</code> to start the server.</li>
         <li>In the <em>client</em> directory, run the command <code>npm start</code> to start the client application.</li>
         <li>That's it! Your MERN Group Chat application should now be up and running.</li>
     </ol>
