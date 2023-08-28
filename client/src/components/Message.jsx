@@ -10,7 +10,7 @@ export default function Message(props) {
   let styles = {};
   let s = {};
   let bs = {};
-  let ds = {};
+  
 
   // Using the useCookies hook to access cookies
   const [cookies, setCookies] = useCookies();
@@ -21,33 +21,9 @@ export default function Message(props) {
   // Creating a DOMParser instance to parse HTML
   var parser = new DOMParser();
 
-  // useEffect hook to fetch data when component mounts
-  useEffect(() => {
-    async function fetchData() {
-      // Fetching link data if the message has a link
-      if (props.msgObj.link) {
-        let res = await axios.get("https://chat-app-fsm6.onrender.com/fetch-data", {
-          params: {
-            url: props.msgObj.link,
-          },
-        });
+ 
 
-        // Scrolling to the bottom
-        props.scroll();
-
-        // Extracting data and truncating description if necessary
-        res = res.data;
-        if (res.description.length > 120)
-          res.description = res.description.substr(0, 120) + "...";
-
-        // Updating the linkData state
-        setLinkData(res);
-      }
-    }
-
-    // Calling the fetchData function
-    fetchData();
-  }, []);
+    
 
   // Checking if the message user matches the logged-in user
   if (cookies.userData.mail === props.msgObj.usermail) {
