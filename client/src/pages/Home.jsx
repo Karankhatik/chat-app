@@ -22,7 +22,7 @@ export default function Home() {
     if (!cookies.token) navigate("/login");
 
     // Fetch messages
-    axios.get("https://chat-app-fsm6.onrender.com/api/message/get-messages", {
+    axios.get("http://localhost:4000/api/message/get-messages", {
       headers: {
         Authorization: `Basic ${cookies.token}`,
       },
@@ -128,7 +128,7 @@ export default function Home() {
         </div>
       </div>
       {/* Display emoji picker if active */}
-      {emojDiv && <EmojiPicker onEmojiClick={emojiClick} />}
+      {emojDiv && <EmojiPicker  onEmojiClick={emojiClick} />}
     </>
   );
 }

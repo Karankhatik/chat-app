@@ -1,24 +1,22 @@
 require("dotenv").config();
 const exp = require("express");
+const bcrypt = require("bcrypt");
 const cors = require("cors");
 const jwt = require("jsonwebtoken");
 const db = require('./config/mongoose');
 const app = exp();
 app.use(exp.urlencoded({extended: true}));
 app.use(exp.json());
+app.use(cors());
 const server = require('http').createServer(app);
 const Message = require('./models/message');
-const socketIo = require('socket.io');
-const io = socketIo(server);
-
-
-const corsOptions = {
-    origin: "*",
-    credentials: true, //access-control-allow-credentials:true
-    optionSuccessStatus: 200,
-  };
-// Allow requests from specific origins
-app.use(cors(corsOptions));
+const io = require('socket.io')(server,{
+    cors:{
+        origin: 'https://vercel.com/karankhatik/chat-app',
+        credentials: true,
+        methods: ["GET","POST"]
+    }
+});
 
 io.on("connection", socket => {
     socket.on("msg", (token, msgObj) => {
@@ -30,7 +28,8 @@ io.on("connection", socket => {
                 username: user.username,
                 usermail: user.mail,
                 msg: msgObj.text,
-                time: msgObj.date,                
+                time: msgObj.date,
+                
             });
             newMsg.save();
             io.emit("new_msg", newMsg);
@@ -41,6 +40,6 @@ io.on("connection", socket => {
 // use express router
 app.use('/api', require('./routes'));
 
-server.listen(process.env.PORT, () => {
-    console.log("Server is listening on port " + process.env.PORT);
+server.listen(4000, () => {
+    console.log("Server is listening on port 4000");
 });

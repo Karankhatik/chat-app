@@ -1,7 +1,6 @@
 // Importing necessary dependencies and styles
 import { useState, useEffect } from "react";
 import { useCookies } from "react-cookie";
-import axios from "axios";
 import "../styles/message.css";
 
 // Defining the Message component
@@ -19,11 +18,7 @@ export default function Message(props) {
   const [linkData, setLinkData] = useState(null);
 
   // Creating a DOMParser instance to parse HTML
-  var parser = new DOMParser();
-
- 
-
-    
+  var parser = new DOMParser();    
 
   // Checking if the message user matches the logged-in user
   if (cookies.userData.mail === props.msgObj.usermail) {
