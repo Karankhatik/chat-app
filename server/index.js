@@ -12,7 +12,7 @@ const server = require('http').createServer(app);
 const Message = require('./models/message');
 const io = require('socket.io')(server,{
     cors:{
-        origin: 'http://localhost:3000',
+        origin: 'https://chat-app-kk.vercel.app/',
         credentials: true,
         methods: ["GET","POST"]
     }
