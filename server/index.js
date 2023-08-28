@@ -7,16 +7,12 @@ const db = require('./config/mongoose');
 const app = exp();
 app.use(exp.urlencoded({extended: true}));
 app.use(exp.json());
-app.use(cors());
 const server = require('http').createServer(app);
 const Message = require('./models/message');
-const io = require('socket.io')(server,{
-    cors:{
-        origin: 'https://chat-app-kk.vercel.app/',
-        credentials: true,
-        methods: ["GET","POST"]
-    }
-});
+//compatible for the cross origin
+app.use(cors({
+    exposedHeaders: ['Authorization']
+  }));
 
 io.on("connection", socket => {
     socket.on("msg", (token, msgObj) => {
