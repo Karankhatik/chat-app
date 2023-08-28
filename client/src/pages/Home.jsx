@@ -33,14 +33,14 @@ export default function Home() {
     });
 
     // Fetch users
-    axios.get("https://chat-app-fsm6.onrender.com/api/user/get-users")
+    axios.get("http://localhost:4000/api/user/get-users")
     .then((res) => {
       const data = res.data;
       setUsers(data);
     });
 
     // Initialize socket connection
-    setSocket(io("https://chat-app-fsm6.onrender.com"));
+    setSocket(io("http://localhost:4000"));
   }, []);
 
   useEffect(() => {
