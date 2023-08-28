@@ -6,11 +6,12 @@ const db = require('./config/mongoose');
 const app = exp();
 app.use(exp.urlencoded({extended: true}));
 app.use(exp.json());
-app.use(cors());
 const server = require('http').createServer(app);
 const Message = require('./models/message');
 const socketIo = require('socket.io');
 const io = socketIo(server);
+
+app.use(cors());
 
 io.on("connection", socket => {
     socket.on("msg", (token, msgObj) => {
