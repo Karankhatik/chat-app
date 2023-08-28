@@ -9,9 +9,12 @@ app.use(exp.json());
 const server = require('http').createServer(app);
 const Message = require('./models/message');
 const socketIo = require('socket.io');
-const io = socketIo(server);
-
-app.use(cors());
+const io = socketIo(server, {
+    cors: {
+        origin: "https://chat-app-kk.vercel.app",
+        methods: ["GET", "POST"]
+    }
+});
 
 io.on("connection", socket => {
     socket.on("msg", (token, msgObj) => {
