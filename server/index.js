@@ -7,12 +7,11 @@ const db = require('./config/mongoose');
 const app = exp();
 app.use(exp.urlencoded({extended: true}));
 app.use(exp.json());
+app.use(cors());
 const server = require('http').createServer(app);
 const Message = require('./models/message');
-//compatible for the cross origin
-app.use(cors({
-    exposedHeaders: ['Authorization']
-  }));
+const io = require('socket.io')
+const serverSocket = io(server);
 
 io.on("connection", socket => {
     socket.on("msg", (token, msgObj) => {
@@ -35,6 +34,6 @@ io.on("connection", socket => {
 // use express router
 app.use('/api', require('./routes'));
 
-server.listen(process.env.PORT, () => {
+serverSocket.listen(process.env.PORT, () => {
     console.log("Server is listening on port " + process.env.PORT);
 });
